@@ -11,13 +11,13 @@
     justify-content: center;
 } */
 
-header{
+header {
 
     height: 60px;
     background-color: rgb(165, 165, 177);
 }
 
-.anchor a{
+.anchor a {
     text-decoration: none;
     margin: 1px;
     padding: 2px;
@@ -26,7 +26,7 @@ header{
     border-radius: 5px;
 }
 
-nav{
+nav {
 
     display: flex;
     align-content: center;
@@ -35,19 +35,20 @@ nav{
     color: white;
 }
 
-main{
+main {
 
     display: flex;
     align-content: center;
     justify-content: center;
 }
-.card{
-    
+
+.card {
+
     margin: 5px;
     padding: 18px;
 }
 
-footer{
+footer {
     display: flex;
     align-content: center;
     justify-content: center;
@@ -64,21 +65,19 @@ table {
 }
 
 tr {
-    background-color: rgb(196, 194, 194)60, 159, 159);
-    border: solid black 2px;
     border: solid black;
 
 }
 
 th {
-    
+    background-color: rgb(196, 194, 194);
     border: 1px;
     border: solid black;
-    
+
 }
 
 td {
-    
+
     border: 1px;
     border: solid black;
 }
@@ -92,7 +91,7 @@ td {
 
     }
 
-    .anchor{
+    .anchor {
         display: none !important
     }
 
@@ -130,7 +129,7 @@ td {
 
     }
 
-    .anchor{
+    .anchor {
         font-size: x-small;
     }
 
