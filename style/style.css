@@ -18,7 +18,7 @@ header{
 }
 
 .anchor a{
-    
+    text-decoration: none;
     margin: 1px;
     padding: 2px;
     color: #d90368;
@@ -92,6 +92,10 @@ td {
 
     }
 
+    .anchor{
+        display: none !important
+    }
+
     #logo {
         width: 50px;
     }
@@ -119,11 +123,15 @@ td {
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
     header {
         flex-direction: column;
         justify-content: center;
 
+    }
+
+    .anchor{
+        font-size: x-small;
     }
 
     #logo {
@@ -155,7 +163,7 @@ td {
 
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1439px){
+/* @media only screen and (min-width: 1024px) and (max-width: 1439px){
 
     #logo {
         width: 70px;
@@ -177,3 +185,4 @@ td {
     main {
         font-size: 2em;
     }
+} */
