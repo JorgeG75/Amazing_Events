@@ -49,9 +49,9 @@ main {
 }
 
 footer {
-    display: flex;
+    /* display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: center; */
     background-color: rgb(201, 201, 201);
 }
 
