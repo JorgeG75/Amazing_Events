@@ -4,12 +4,10 @@
     box-sizing: border-box;
 }
 
-/* body{
+body{
     
-    display: flex;
-    align-content: center;
-    justify-content: center;
-} */
+    background-color: #cfa5b8;
+}
 
 header {
 
@@ -28,30 +26,29 @@ header {
 
 nav {
     height: 50px;
-    /* display: flex !important;
-    align-content: center !important;
-    justify-content: center !important; */
-    background-color: rgb(201, 201, 201);
+    background-color: #c6a3b3;
     color: white;
 }
 
 main {
 
     display: flex;
+    align-items: center;
     align-content: center;
     justify-content: center;
+    background-color: #e5e5e5;
 }
 
-.card {
-
+.card{
+    padding: 10px;
     margin: 5px;
-    padding: 18px;
+    height: 250px;
 }
+
+
 
 footer {
-    /* display: flex;
-    align-content: center;
-    justify-content: center; */
+    
     background-color: rgb(201, 201, 201);
 }
 
@@ -91,8 +88,8 @@ td {
 
     }
 
-    .anchor {
-        display: none !important
+    header a{
+        display: none;
     }
 
     #logo {
@@ -104,6 +101,7 @@ td {
     }
 
     nav {
+        
         justify-content: space-around;
         font-size: xx-small;
         margin: 3px;
