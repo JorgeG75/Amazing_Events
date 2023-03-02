@@ -173,7 +173,7 @@ var data = {
   };
 
 
-
+// compara fechas parseando currentDate y (date)
 const currentDate = Date.parse(data.currentDate);
 
 const filteredEvents = data.events.filter(event => {

@@ -10,7 +10,6 @@ body {
 }
 
 header {
-
     height: 60px;
     background-color: rgb(165, 165, 177);
 }
@@ -32,7 +31,6 @@ nav {
 
 main {
     height: max-content !important;
-
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -51,8 +49,20 @@ main {
     background-color: #c6a3b3;
 }
 
+.upMain{
+    height: 420px;
+}
+.contactMain{
+    height: 420px !important;
+}
 
+.detailsMain{
+    height: 420px !important;
+}
 
+.statMain{
+    height: 420px !important;
+}
 footer {
 
     background-color: rgb(201, 201, 201);
