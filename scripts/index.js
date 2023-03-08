@@ -180,7 +180,7 @@ function llenarTarjeta(events) {
   let newCard = document.querySelector(".cardContainer")
   data.events.forEach(events => {
     newCard.innerHTML += ` 
-  <div class="card" style="width: 10rem;">
+  <div class="card container-fluid" style="width: 16rem;">
   <img src="${events.image}" class="card-img-top" alt="...">
   <div class="card-body">
       <h5 class="card-title">"${events.name}"</h5>

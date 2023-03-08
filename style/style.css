@@ -5,11 +5,13 @@
 }
 
 body {
-
     background-color: #cfa5b8;
 }
 
 header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     height: 60px;
     background-color: rgb(165, 165, 177);
 }
@@ -24,6 +26,7 @@ header {
 }
 
 nav {
+    
     height: 50px;
     background-color: #c6a3b3;
     color: white;
@@ -35,12 +38,14 @@ main {
     align-items: center !important;
     justify-content: center !important;
     background-color: #e5e5e5;
+    margin: 5px;
+    padding: 5px;
 }
 
 .card {
 
     padding: 10px;
-    margin: 1px;
+    margin: 5px;
     height: 250px;
     background-color: black !important;
 }
@@ -64,6 +69,9 @@ main {
     height: 420px !important;
 }
 footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
     background-color: rgb(201, 201, 201);
 }
