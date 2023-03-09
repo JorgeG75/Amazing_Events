@@ -204,9 +204,9 @@ const eventsList = document.getElementById("eventsList");
 
 
 
-// Función para filtrar los eventos por categoría y término de búsqueda
+
 function filterEvents() {
-  // Obtener los valores de los checkboxes seleccionados
+  // Obtener los valores de los checkboxs seleccionados
   const selectedCategories = Array.from(checkboxes)
     .filter((checkbox) => checkbox.checked)
     .map((checkbox) => checkbox.value);
@@ -257,8 +257,10 @@ searchInput.addEventListener("input", filterEvents);
 
 const contenedor = document.getElementById("formSearch");
 
+contenedor.addEventListener("click",escucharClick)
+
 function escucharClick(e){
-  if(e.target.classList.contains("checks")){
-    e,target.classList.toogle("cardsFiltradas")
+  if(e.target.classList.contains("cardsFiltradas")){
+    e.target.classList.toogle("checks")
   }
 }

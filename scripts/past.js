@@ -211,11 +211,8 @@ const searchInput = document.getElementById("search");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 const eventsList = document.getElementById("eventsList");
 
-
-
-// Función para filtrar los eventos por categoría y término de búsqueda
 function filterEvents() {
-  // Obtener los valores de los checkboxes seleccionados
+  // Obtener los valores de los checkboxs seleccionados
   const selectedCategories = Array.from(checkboxes)
     .filter((checkbox) => checkbox.checked)
     .map((checkbox) => checkbox.value);
@@ -235,7 +232,7 @@ function filterEvents() {
       
   );
 
-  // Mostrar los eventos filtrados
+  // Mostrar las cards de los eventos filtrados
   if (filteredEvents.length > 0) {
     eventsList.innerHTML = "";
     filteredEvents.forEach((event) => {
@@ -257,7 +254,7 @@ function filterEvents() {
   }
 }
 
-// Escuchar cambios en los checkboxes y el input de búsqueda
+// Escuchar cambios en los checkboxs y el input de búsqueda
 checkboxes.forEach((checkbox) =>
   checkbox.addEventListener("change", filterEvents)
 );

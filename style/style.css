@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #cfa5b8;
+    background-color: #ebe5e8 !important;
 }
 
 header {
@@ -46,12 +46,14 @@ main ul{
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    margin: 5px;
+    padding: 5px;
 }
 
 .card {
 
-    padding: 10px;
-    margin: 5px;
+    padding: 10px !important;
+    margin: 5px !important;
     background-color: black !important;
 }
 
