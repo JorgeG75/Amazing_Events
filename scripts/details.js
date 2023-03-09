@@ -172,93 +172,27 @@ var data = {
     ]
   };
 
-// compara fechas parseando currentDate y (date)
 
-const currentDate = Date.parse(data.currentDate);
+const queryString = location.search
 
-const filteredEvents = data.events.filter(event => {
-  const eventDate = Date.parse(event.date);
-  return eventDate > currentDate; // eventos posteriores
-});
+const params = new URLSearchParams(queryString)
 
-// Mostrar los eventos filtrados por la consola
-console.log(filteredEvents);
+const id = params.get("_id")
+console.log(id)
+
+const eventos = data.events.find(events => data.events.id == id)
 
 
 
-let cardContainer = document.getElementById("up-container");
-llenarTarjeta(filteredEvents)
 
-function llenarTarjeta(events) {
-  let newCard = document.querySelector(".upContainer")
-  filteredEvents.forEach(events => {
-    newCard.innerHTML += `
-    
-  <div class="card container-fluid" style="width: 16rem;">
-  <img src="${events.image}" class="card-img-top" alt="...">
-  <div class="card-body">
-      <h5 class="card-title">"${events.name}"</h5>
-      <p class="card-text">"${events.description}"</p>
-      <h6 class="card-title">Price: U$S ${events.price}</h6>
-      <a href="#" class="btn-sm btn btn-danger">ver más...</a>
-  </div>
+const div = document.querySelector(".cardDetails")
+div.innerHTML = ` 
+<div class="card container-fluid" style="max-width: 20em;">
+<img src="${eventos.image}" class="card-img-top" alt="...">
+<div class="card-body">
+    <h5 class="card-title">"${eventos.name}"</h5>
+    <p class="card-text">"${eventos.description}"</p>
+    <h6 class="card-title">Price: U$S ${eventos.price}</h6>
+    <a href="./index.html" class="btn-sm btn btn-danger">Volver</a>
+</div>
 </div>`
-  })
-} 
-
-
-const searchInput = document.getElementById("search");
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-const eventsList = document.getElementById("eventsList");
-
-
-
-// Función para filtrar los eventos por categoría y término de búsqueda
-function filterEvents() {
-  // Obtener los valores de los checkboxes seleccionados
-  const selectedCategories = Array.from(checkboxes)
-    .filter((checkbox) => checkbox.checked)
-    .map((checkbox) => checkbox.value);
-
-  // pasar a minusculas el texto ingresado
-  const searchTerm = searchInput.value.toLowerCase();
-
-  // Filtrar los eventos
-  const filteredEvents = data.events.filter(
-    (event) =>
-      (selectedCategories.length === 0 ||
-        selectedCategories.includes(event.category)) &&
-      (searchTerm.length === 0 ||
-        event.name.toLowerCase().includes(searchTerm) ||
-        event.description.toLowerCase().includes(searchTerm) ||
-        event.category.toLowerCase().includes(searchTerm))
-      
-  );
-
-  // Mostrar los eventos filtrados
-  if (filteredEvents.length > 0) {
-    eventsList.innerHTML = "";
-    filteredEvents.forEach((event) => {
-      const eventItem = document.createElement("li");
-      eventItem.innerHTML = ` 
-      <div class="card container-fluid" style="width: 16rem;">
-      <img src="${event.image}" class="card-img-top" alt="...">
-      <div class="card-body">
-          <h5 class="card-title">"${event.name}"</h5>
-          <p class="card-text">"${event.description}"</p>
-          <h6 class="card-title">Price: U$S ${event.price}</h6>
-          <a href="#" class="btn-sm btn btn-danger">ver más...</a>
-      </div>
-    </div>`;
-      eventsList.appendChild(eventItem);
-    });
-  } else {
-    eventsList.innerHTML = "No se encontraron eventos con los filtros seleccionados. Por favor, ajuste los filtros e intente nuevamente.";
-  }
-}
-
-// Escuchar cambios en los checkboxes y el input de búsqueda
-checkboxes.forEach((checkbox) =>
-  checkbox.addEventListener("change", filterEvents)
-);
-searchInput.addEventListener("input", filterEvents);

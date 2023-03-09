@@ -173,8 +173,10 @@ var data = {
   };
 
 
+
 let cardContainer = document.getElementById("card-container");
 llenarTarjeta(data.events)
+
 
 function llenarTarjeta(events) {
   let newCard = document.querySelector(".cardContainer")
@@ -186,7 +188,7 @@ function llenarTarjeta(events) {
       <h5 class="card-title">"${events.name}"</h5>
       <p class="card-text">"${events.description}"</p>
       <h6 class="card-title">Price: U$S ${events.price}</h6>
-      <a href="#" class="btn-sm btn btn-danger">ver más...</a>
+      <a href="./details.html?id=${events._id}" class="btn-sm btn btn-danger">ver más...</a>
   </div>
 </div>`
   })
@@ -196,25 +198,67 @@ function llenarTarjeta(events) {
 
 
 
+const searchInput = document.getElementById("search");
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const eventsList = document.getElementById("eventsList");
 
 
 
+// Función para filtrar los eventos por categoría y término de búsqueda
+function filterEvents() {
+  // Obtener los valores de los checkboxes seleccionados
+  const selectedCategories = Array.from(checkboxes)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.value);
+
+  // pasar a minusculas el texto ingresado
+  const searchTerm = searchInput.value.toLowerCase();
+
+  // Filtrar los eventos
+  const filteredEvents = data.events.filter(
+    (event) =>
+      (selectedCategories.length === 0 ||
+        selectedCategories.includes(event.category)) &&
+      (searchTerm.length === 0 ||
+        event.name.toLowerCase().includes(searchTerm) ||
+        event.description.toLowerCase().includes(searchTerm) ||
+        event.category.toLowerCase().includes(searchTerm))
+      
+  );
+
+  // Mostrar los eventos filtrados
+  if (filteredEvents.length > 0) {
+    eventsList.innerHTML = "";
+    filteredEvents.forEach((event) => {
+      const eventItem = document.createElement("li");
+      eventItem.innerHTML = ` 
+      <div class="card container-fluid" style="width: 16rem;">
+      <img src="${event.image}" class="card-img-top" alt="...">
+      <div class="card-body">
+          <h5 class="card-title">"${event.name}"</h5>
+          <p class="card-text">"${event.description}"</p>
+          <h6 class="card-title">Price: U$S ${event.price}</h6>
+          <a href="#" class="btn-sm btn btn-danger">ver más...</a>
+      </div>
+    </div>`;
+      eventsList.appendChild(eventItem);
+    });
+  } else {
+    eventsList.innerHTML = "No se encontraron eventos con los filtros seleccionados. Por favor, ajuste los filtros e intente nuevamente.";
+  }
+}
+
+// Escuchar cambios en los checkboxes y el input de búsqueda
+checkboxes.forEach((checkbox) =>
+  checkbox.addEventListener("change", filterEvents)
+);
+searchInput.addEventListener("input", filterEvents);
 
 
+const contenedor = document.getElementById("formSearch");
 
-// for (let i = 0 ; i <= data.events.length-1; i++){
-//   console.log(data.events[i]);
-// }
-
-// let first = data.currentDate;
-// let second = data.events[1].date;
-
-// if (first<second){
-//   console.log(first + "es anterior a: " + second);
-// }
-// else if(first>second){
-//   console.log(first +"es posterior" + second);
-// }
-// else{
-//   console.log(first + "es igual" + second);
-// }
+function escucharClick(e){
+  if(e.target.classList.contains("checks")){
+    e,target.classList.toogle("cardsFiltradas")
+  }
+}

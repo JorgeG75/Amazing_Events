@@ -13,7 +13,7 @@
   <title>HOME</title>
 </head>
 
-<body>
+<body class="container-fluid">
   <header class="container-fluid">
     <div class="container">
       <div class="row">
@@ -57,19 +57,19 @@
     <form method="get" class="row">
       <fieldset>
 
-        <input type="checkbox" name="grade" id="categoria1 checkboxs" value="1st">
+        <input type="checkbox" name="grade" id="categoria1" value="Food Fair">
         <label for="categoria1">Food Fair</label>
-        <input type="checkbox" name="grade" id="categoria2 checkboxs" value="2st">
+        <input type="checkbox" name="grade" id="categoria2" value="Museum">
         <label for="categoria2">Museum</label>
-        <input type="checkbox" name="grade" id="categoria3 checkboxs" value="3st">
+        <input type="checkbox" name="grade" id="categoria3" value="Costume Party">
         <label for="categoria3">Costume Party</label>
-        <input type="checkbox" name="grade" id="categoria4 checkboxs" value="4st">
+        <input type="checkbox" name="grade" id="categoria4" value="Music Concert">
         <label for="categoria4">Music Concert</label>
-        <input type="checkbox" name="grade" id="categoria5 checkboxs" value="5st">
+        <input type="checkbox" name="grade" id="categoria5" value="Race">
         <label for="categoria5">Race</label>
-        <input type="checkbox" name="grade" id="categoria6 checkboxs" value="6st">
+        <input type="checkbox" name="grade" id="categoria6" value="Book Exchange">
         <label for="categoria5">Book Exchange</label>
-        <input type="checkbox" name="grade" id="categoria7 checkboxs" value="7st">
+        <input type="checkbox" name="grade" id="categoria7" value="Cinema">
         <label for="categoria5">Cinema</label>
 
         <label for="search"></label>
@@ -79,6 +79,8 @@
 
       </fieldset>
     </form>
+
+    <ul id="eventsList" class="row cardsFiltradas"></ul>
 
 
     <div id="card-container" class="container-fluid cardContainer row justify-content-center">
@@ -120,6 +122,9 @@
     crossorigin="anonymous"></script>
 
   <script src="./scripts/index.js"></script>
+  
+
+
 </body>
 
 </html>
