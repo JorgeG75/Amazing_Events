@@ -6,27 +6,27 @@ function traerDatos(url) {
         .then(response => response.json())
         .then(data => {
             let eventos = data.events;
-            let eventosUP = eventos.filter(evento => evento.date > data.currentDate)
-            let eventosPAST = eventos.filter(evento => evento.date < data.currentDate)
-            let eventosnoUP = eventos.filter(evento => evento.date < data.currentDate)
-            let eventoMenorPorcentaje = filtrarEventoMenorPorcentaje(eventosnoUP)
-            let eventoMayorPocentaje = filtrarEventoMayorPorcentaje(eventosnoUP)
-            let eventoMayorCapacidad = filtrarEventoMayorCapacidad(eventos)
-            let categoriasFiltradasUP = filtrarCategorias(eventosUP)
-            let eventosPorCategoriaUP = filtrareventosporCategoria(categoriasFiltradasUP, eventosUP)
-            let revenuesUP = calcularRevenues(eventosPorCategoriaUP)
-            let porcentajeAsistenciasUP = calcularAsistenciasporCat(eventosPorCategoriaUP)
-            let categoriasFiltradasPAST = filtrarCategorias(eventosPAST)
-            let eventosPorCategoriaPAST = filtrareventosporCategoria(filtrarCategorias(eventosPAST), eventosPAST)
-            let revenuesPAST = calcularRevenues(eventosPorCategoriaPAST)
-            let porcentajeAsistenciaPAST = calcularAsistenciasporCat(eventosPorCategoriaPAST)
-            let categoriasCalculadasUP = crearCategoriasCalculadas(categoriasFiltradasUP, revenuesUP, porcentajeAsistenciasUP)
-            let categoriasCalculadasPAST = crearCategoriasCalculadas(categoriasFiltradasPAST, revenuesPAST, porcentajeAsistenciaPAST)
-            renderizarDatosEnTabla(categoriasCalculadasUP, categoriasCalculadasPAST, eventoMayorPocentaje, eventoMenorPorcentaje, eventoMayorCapacidad)
+            let eventUp = eventos.filter(evento => evento.date > data.currentDate)
+            let eventPast = eventos.filter(evento => evento.date < data.currentDate)
+            let eventDate = eventos.filter(evento => evento.date < data.currentDate)
+            let menorPorcentaje = filtrarmenorPorcentaje(eventDate)
+            let mayorPorcentaje = filtrarEventoMayorPorcentaje(eventDate)
+            let mayorCap = filtrarmayorCap(eventos)
+            let filtroCatUp = filtrarCategorias(eventUp)
+            let eventosPorCategoriaUP = filtrareventosporCategoria(filtroCatUp, eventUp)
+            let concurrenciaUp = concurrencia(eventosPorCategoriaUP)
+            let porConcUp = calcularConcurrenciaCat(eventosPorCategoriaUP)
+            let filtroCatPast = filtrarCategorias(eventPast)
+            let eventCatPast = filtrareventosporCategoria(filtrarCategorias(eventPast), eventPast)
+            let ConcurrenciPast = concurrencia(eventCatPast)
+            let porConcPast = calcularConcurrenciaCat(eventCatPast)
+            let catUp = calcularCategorias(filtroCatUp, concurrenciaUp, porConcUp)
+            let catPast = calcularCategorias(filtroCatPast, ConcurrenciPast, porConcPast)
+            pintarDatos(catUp, catPast, mayorPorcentaje, menorPorcentaje, mayorCap)
         })
 }
 
-function renderizarDatosEnTabla(arraycategoriascalculadasup, arraycategoriascalculadaspast, eventomenorpor, eventomayorpor, eventomayorcap) {
+function pintarDatos(arraycatUp, arraycatPast, eventomenorpor, eventomayorpor, eventomayorcap) {
     const primerosDatos = document.getElementById('table1')
     const contenedorUP = document.getElementById('upcomingTable')
     const contenedorPAST = document.getElementById('tablePast')
@@ -38,7 +38,7 @@ function renderizarDatosEnTabla(arraycategoriascalculadasup, arraycategoriascalc
     `
     primerosDatos.appendChild(trPrimer)
 
-    arraycategoriascalculadasup.forEach(categoria => {
+    arraycatUp.forEach(categoria => {
         let trCategoria = document.createElement('tr')
         trCategoria.innerHTML = `
         <td>${categoria.name}</td>
@@ -46,7 +46,7 @@ function renderizarDatosEnTabla(arraycategoriascalculadasup, arraycategoriascalc
         <td>${categoria.porcentaje.toFixed(2)}%</td>`
         contenedorUP.appendChild(trCategoria)
     })
-    arraycategoriascalculadaspast.forEach(categoria => {
+    arraycatPast.forEach(categoria => {
         let trCategoria = document.createElement('tr')
         trCategoria.innerHTML = `
         <td>${categoria.name}</td>
@@ -57,32 +57,7 @@ function renderizarDatosEnTabla(arraycategoriascalculadasup, arraycategoriascalc
 
 }
 
-function crearCategoriasCalculadas(arraycategorias, arrayrevenues, arrayporcentajes) {
-    let arrayCategoriasCalculadas = []
-    for (let i = 0; i < arraycategorias.length; i++) {
-        categoriaCalculada = {
-            name: arraycategorias[i],
-            revenues: arrayrevenues[i],
-            porcentaje: arrayporcentajes[i]
-        }
-        arrayCategoriasCalculadas.push(categoriaCalculada)
-    }
-    return arrayCategoriasCalculadas;
-}
-
-function calcularAsistenciasporCat(arrayeventosporcategoria) {
-    let arrayporcentajes = []
-    arrayeventosporcategoria.forEach(array => {
-        let resultado = 0
-        for (let i = 0; i < array.length; i++) {
-            resultado = resultado + calculoporcentajeAsistencia(array[i])
-        }
-        arrayporcentajes.push(resultado / array.length)
-    })
-    return arrayporcentajes;
-}
-
-function calcularRevenues(arrayeventosporcategoria) {
+function concurrencia(arrayeventosporcategoria) {
     let arrayrevenues = []
     arrayeventosporcategoria.forEach(array => {
         let revenuescat = []
@@ -100,10 +75,36 @@ function calcularRevenues(arrayeventosporcategoria) {
     return arrayrevenues
 }
 
-function filtrareventosporCategoria(arraycategorias, eventosup) {
+function calcularCategorias(arraycategorias, arrayrevenues, arrayporcentajes) {
+    let arrayCategoriasCalculadas = []
+    for (let i = 0; i < arraycategorias.length; i++) {
+        categoriaCalculada = {
+            name: arraycategorias[i],
+            revenues: arrayrevenues[i],
+            porcentaje: arrayporcentajes[i]
+        }
+        arrayCategoriasCalculadas.push(categoriaCalculada)
+    }
+    return arrayCategoriasCalculadas;
+}
+
+function calcularConcurrenciaCat(arrayeventosporcategoria) {
+    let arrayporcentajes = []
+    arrayeventosporcategoria.forEach(array => {
+        let resultado = 0
+        for (let i = 0; i < array.length; i++) {
+            resultado = resultado + calculoporcentajeAsistencia(array[i])
+        }
+        arrayporcentajes.push(resultado / array.length)
+    })
+    return arrayporcentajes;
+}
+
+
+function filtrareventosporCategoria(arraycategorias, eventUp) {
     let arrayeventosporcategoria = []
     arraycategorias.forEach(categoria => {
-        filtradosporcategoria = eventosup.filter(evento => evento.category == categoria)
+        filtradosporcategoria = eventUp.filter(evento => evento.category == categoria)
         arrayeventosporcategoria.push(filtradosporcategoria)
     })
     return arrayeventosporcategoria;
@@ -119,7 +120,7 @@ function filtrarCategorias(eventos) {
     return arrayCategorias;
 }
 
-function filtrarEventoMayorCapacidad(eventos) {
+function filtrarmayorCap(eventos) {
     return eventos.sort((a, b) => b.capacity - a.capacity)[0].name
 }
 
@@ -133,7 +134,7 @@ function filtrarEventoMayorPorcentaje(eventos) {
     return eventomayor.name;
 }
 
-function filtrarEventoMenorPorcentaje(eventos) {
+function filtrarmenorPorcentaje(eventos) {
     let eventomenor = eventos[0]
     for (i = 1; i < eventos.length; i++) {
         if (calculoporcentajeAsistencia(eventos[i]) < calculoporcentajeAsistencia(eventomenor)) {
