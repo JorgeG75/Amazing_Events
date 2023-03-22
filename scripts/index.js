@@ -47,8 +47,8 @@ function filtroInput(array,container){
 
   let checked=[...document.querySelectorAll('.checkbox:checked')];
   checked=checked.map(element=>element.value);
-  let filterSearch=array.filter((element)=>element.name.toLowerCase().includes(search.value.toLowerCase())||
-  element.category.toLowerCase().includes(search.value.toLowerCase()));
+  let filterSearch = array.filter((element) => element.name.toLowerCase().includes(search.value.toLowerCase()) ||
+    element.category.toLowerCase().includes(search.value.toLowerCase()) || element.description.toLowerCase().includes(search.value.toLowerCase()));
   
   let filterChecks=filterSearch.filter(element=>checked.includes(element.category)|| checked.length===0);
 
