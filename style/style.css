@@ -57,6 +57,8 @@ main ul{
     background-color: black !important;
 }
 
+
+
 .card-body {
     background-color: #c6a3b3;
 }
@@ -68,12 +70,18 @@ main ul{
     height: 420px !important;
 }
 
+.cardDetails{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
 .detailsMain{
     height: 420px !important;
 }
 
 .statMain{
-    height: 420px !important;
+    background-color: rgb(202, 163, 163);
 }
 footer {
     display: flex !important;
@@ -82,37 +90,22 @@ footer {
 
     background-color: rgb(201, 201, 201);
 }
-
-table {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: solid black;
-
+table{
+    margin:auto;
+    empty-cells: show;
+    width: 60%;
+    
 }
-
-tr {
-    border: solid black;
-
+thead{
+    font-weight: bold;
 }
-
-th {
+table th{
     background-color: rgb(196, 194, 194);
-    border: 1px;
-    border: solid black;
-
+}
+table td, table th, table tr{
+    border: 1px solid black;
 }
 
-td {
-
-    padding: 2px;
-
-    border: 1px;
-    border: solid black;
-}
-
-/* media queries */
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
     header {
@@ -196,26 +189,3 @@ td {
 
 }
 
-/* @media only screen and (min-width: 1024px) and (max-width: 1439px){
-
-    #logo {
-        width: 70px;
-    }
-}
-
-@media only screen and (min-width: 1440px) and (max-width: 2559px){
-    #logo {
-        width: 100px;
-    }
-
-    h1 {
-        font-size: 3em;
-    }
-
-    nav {
-        font-size: 1em;
-    }
-    main {
-        font-size: 2em;
-    }
-} */
